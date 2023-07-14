@@ -1,10 +1,15 @@
+import Header from "./components/Header"
+import Home from "./components/Home"
+import { GlobalStyle } from "./global/style"
 
 function App() {
 
 
   return (
     <>
-      hello a new app
+    <GlobalStyle/>
+      <Header/>
+      <Home/>
     </>
   )
 }

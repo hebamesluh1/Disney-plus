@@ -1,15 +1,15 @@
 import Header from "./components/Header"
-import Home from "./components/Home"
 import { GlobalStyle } from "./global/style"
+import Router from "./router/Router"
 
 function App() {
 
 
   return (
     <>
-    <GlobalStyle/>
-      <Header/>
-      <Home/>
+      <GlobalStyle />
+      <Header />
+      <Router />
     </>
   )
 }

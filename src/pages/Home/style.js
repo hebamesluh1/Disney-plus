@@ -5,9 +5,9 @@ export const Container = styled.main`
   padding: 0 calc(3.5vw + 5px);
   position: relative;
   overflow-x: hidden;
-  background: url("../../assets/img/home-background.png");
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  // background: url("../../assets/img/home-background.png");
+  // background-attachment: fixed;
+  // background-repeat: no-repeat;
+  // background-position: center;
+  // background-size: cover;
 `;

@@ -1,17 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom';
 import playIcon from '../../assets/img/play-icon-black.png'
 import trailerIcon from '../../assets/img/play-icon-white.png'
 import group from '../../assets/img/group-icon.png';
+import globalApi from '../../service/globalApi';
 import { Description, Subtitle, GroupWatchButton, AddButton, TrailerButton, PlayButton, Controls, ImageTitle, Background, Container } from './style'
-
+const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
+import { genere } from '../../mock/data'
 const Details = () => {
+  const { id } = useParams();
+  const [movieList, setMovieList] = useState([]);
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    getMovieGeneralId();
+  }, []);
+
+  const getMovieGeneralId = () => {
+    globalApi.getMovieByGenreId(genere.id)
+      .then(res => {
+        setLoading(false)
+        setMovieList(res.data.results);
+        console.log(res.data.results);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  const myData = movieList.find((item) => item.id === Number(id));
+  console.log(myData)
   return (
     <Container>
       <Background>
-        <img src="https://th.bing.com/th/id/OIP.u0AZmNQr9-NUk-5dCvwaFgHaEK?pid=ImgDet&rs=1" alt="" />
+        <img src={IMAGE_BASE_URL + myData?.poster_path} alt="" />
       </Background>
       <ImageTitle>
-        <img src="https://th.bing.com/th/id/R.ab82f13fb8ded77fe69ef04010b8b29f?rik=QA6fFXr7v1VJzg&riu=http%3a%2f%2fpngimg.com%2fuploads%2fwalt_disney%2fwalt_disney_PNG3.png&ehk=nO%2fJkowZi6RLHFmaA0v9QbB4IF8oBpgt3yTBSzLImrQ%3d&risl=&pid=ImgRaw&r=0" alt="" />
+        {myData?.original_title}
       </ImageTitle>
       <Controls>
         <PlayButton>
@@ -30,10 +55,10 @@ const Details = () => {
         </GroupWatchButton>
       </Controls>
       <Subtitle>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur sit culpa corrupti cumque ducimus quas dolor debitis. Quibusdam, officia possimus minus architecto expedita omnis ut accusamus. Mollitia quidem ducimus illum!
+        {myData?.original_title}
       </Subtitle>
       <Description>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim laboriosam quo cupiditate id molestias! Excepturi deleniti voluptate id veritatis, est aliquid porro, quae quasi placeat minus architecto sint qui voluptatem?
+        {myData?.overview}
       </Description>
     </Container>
   )

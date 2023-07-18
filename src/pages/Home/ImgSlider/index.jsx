@@ -1,39 +1,74 @@
-import React from "react";
-// Import css files
+import React, { useEffect, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-import { Carousel,Wrap } from "./style";
-
+import { Carousel, Wrap } from "./style";
+import globalApi from "../../../service/globalApi";
 import img1 from "../../../assets/img/slider-badging.jpg";
-import img2 from "../../../assets/img/slider-badag.jpg";
-import img3 from "../../../assets/img/slider-scale.jpg";
-import img4 from "../../../assets/img/slider-scales.jpg";
 
-  const ImgSlider=()=> {
+const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
+
+const ImgSlider = () => {
+  const [movie, setMovie] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    getTrendingMovies();
+  }, []);
+
+  const getTrendingMovies = () => {
+    globalApi.getTrendingVideos.then((res) => {
+      setLoading(false);
+      setMovie(res.data.results);
+    });
+  };
+
+  const handleImageLoad = () => {
+    console.log("Image loaded");
+  };
+
+  const handleImageError = () => {
+    setError(true);
+  };
+
   var settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay:true
+    autoplay: true,
   };
+
   return (
-    <Carousel {...settings}>
-      <Wrap>
-        <img src={img2} alt="" />
-      </Wrap>
-      <Wrap>
-        <img src={img1} alt="" />
-      </Wrap>
-      <Wrap>
-        <img src={img3} alt="" />
-      </Wrap>
-      <Wrap>
-        <img src={img4} alt="" />
-      </Wrap>
-    </Carousel>
+    <>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <Carousel {...settings}>
+          {movie.map((item, index) => (
+            <Wrap key={index}>
+              {error ? (
+                <img
+                  src={img1}
+                  alt="Error"
+                  onLoad={handleImageLoad}
+                  onError={handleImageError}
+                />
+              ) : (
+                <img
+                  src={`${IMAGE_BASE_URL}${item?.backdrop_path}`}
+                  alt=""
+                  onLoad={handleImageLoad}
+                  onError={handleImageError}
+                />
+              )}
+            </Wrap>
+          ))}
+        </Carousel>
+      )}
+    </>
   );
-}
-export default ImgSlider
+};
+
+export default ImgSlider;

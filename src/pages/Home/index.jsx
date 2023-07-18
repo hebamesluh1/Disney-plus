@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from './style'
 import ImgSlider from './ImgSlider'
 import Viewers from './Viewers'
 import Movies from './Movies'
+
+
+
 const Home = () => {
     return (
         <Container>

@@ -1,39 +1,22 @@
 import React from 'react'
-import { Content, Wrap } from './style'
-
-import img from '../../../assets/img/viewers-pixar.png';
+import { Title, Content } from './style'
+import MovieList from './MovieList'
+import { genere } from '../../../mock/data'
 
 const Movies = () => {
+
     return (
-        <div>
-            <h4>Recommended for You</h4>
-            <Content>
-                <Wrap>
-                    <img src={img} alt="" />
-                </Wrap>
-                <Wrap>
-                    <img src={img} alt="" />
-                </Wrap>
-                <Wrap>
-                    <img src={img} alt="" />
-                </Wrap>
-                <Wrap>
-                    <img src={img} alt="" />
-                </Wrap>
-                <Wrap>
-                    <img src={img} alt="" />
-                </Wrap>
-                <Wrap>
-                    <img src={img} alt="" />
-                </Wrap>
-                <Wrap>
-                    <img src={img} alt="" />
-                </Wrap>
-                <Wrap>
-                    <img src={img} alt="" />
-                </Wrap>
-            </Content>
-        </div>
+
+        <>
+            {genere.map((item, index) => index <= 4 &&
+                (
+                    <Content key={item.id}>
+                        <Title>{item.name}</Title>
+                        <MovieList genreId={item.id} />
+                    </Content>
+                )
+            )}
+        </>
     )
 }
 

@@ -22,6 +22,7 @@ export const Carousel = styled(Slider)`
 `;
 export const Wrap = styled.div`
 cursor: pointer;
+height:400px;
 img {
     border: 4px solid transparent;
     width: 100%;

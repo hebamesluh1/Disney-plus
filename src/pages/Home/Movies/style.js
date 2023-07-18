@@ -1,12 +1,17 @@
 import styled from "styled-components";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export const Content = styled.div`
-  display: grid;
-  grid-gap: 25px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 20px;
+`;
+
+export const Container = styled(Swiper)`
+  display: flex;
+  overflow: none;
 `;
 
 export const Wrap = styled.div`
+  width: 200px;
   border-radius: 10px;
   overflow: hidden;
   border: 3px solid rgba(249, 249, 249, 0.1);
@@ -25,4 +30,9 @@ export const Wrap = styled.div`
     transform: scale(1.05);
     border-color: rgba(249, 249, 249, 0.8);
   }
+`;
+export const Title = styled.h2`
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
 `;

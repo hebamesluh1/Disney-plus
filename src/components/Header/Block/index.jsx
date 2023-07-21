@@ -1,11 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const Block = ({href,src,title}) => {
+const Block = ({ to, src, title }) => {
     return (
-        <a href={href}>
+        <Link to={to}>
             <img src={src} alt={title} />
             <span>{title}</span>
-        </a>
+        </Link>
     )
 }
 

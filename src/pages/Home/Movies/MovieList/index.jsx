@@ -9,6 +9,7 @@ import { SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
+import Spinner from '../../../../components/Spinner';
 
 
 const MovieList = ({ genreId }) => {
@@ -36,7 +37,7 @@ const MovieList = ({ genreId }) => {
       slidesPerView={6}
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}>
-      {loading ? "loading ..." : <>
+      {loading ? <Spinner/> : <>
         {movieList.map((movie, index) => (
           <SwiperSlide>
             <MovieCard movie={movie} key={index} />

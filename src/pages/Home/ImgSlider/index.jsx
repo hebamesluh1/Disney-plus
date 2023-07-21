@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Carousel, Wrap } from "./style";
 import globalApi from "../../../service/globalApi";
 import img1 from "../../../assets/img/slider-badging.jpg";
+import Spinner from "../../../components/Spinner";
 
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
 
@@ -43,7 +44,7 @@ const ImgSlider = () => {
   return (
     <>
       {loading ? (
-        <p>Loading...</p>
+        <Spinner/>
       ) : (
         <Carousel {...settings}>
           {movie.map((item, index) => (

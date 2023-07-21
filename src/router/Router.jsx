@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from '../pages/Home';
-import Details from '../pages/Details';
-import Login from '../pages/Login';
+
+const Home = lazy(() => import("../pages/Home"));
+const Details = lazy(() => import('../pages/Details'));
+const Login = lazy(() => import('../pages/Login'));
+const ProtectedRoute = lazy(() => import('../components/protectedRoute'));
 
 const Router = () => {
     return (
         <Routes>
-            <Route path='/login' element={<Login/>}/>
-            <Route path="/" element={<Home />} />
-            <Route path="/details/:id" element={<Details />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/' element={<ProtectedRoute />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/details/:id" element={<Details />} />
+            </Route>
         </Routes>
     );
 };
